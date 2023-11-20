@@ -3,13 +3,13 @@ import API from "./config.js";
 const button = document.querySelector('#submit-search');
 const inputField = document.querySelector('#cityName');
 const cityNameContainer = document.querySelector('.city-info')
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const container = document.querySelector(".container");
 
 //create elements function
 function createWeatherCards(data){
   for(let i= 0; i < 5; i++) {
     // d = date
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const d = new Date();
     // dow = dateOfWeek
     const dow = weekdays[(d.getDay() + i) % 7]
@@ -37,7 +37,6 @@ function createWeatherCards(data){
     dowContentBeforeSliderAnimation.innerHTML = dow;
     contentBox.appendChild(dowContentBeforeSliderAnimation);
 
-    console.log(data.forecast.forecastday[i].day.condition.text);
     const tempDescription = document.createElement("h4");
     tempDescription.innerHTML = data.forecast.forecastday[i].day.condition.text;
     contentBox.appendChild(tempDescription);
@@ -75,7 +74,6 @@ function createWeatherCards(data){
     minMax.appendChild(maxTemp);
   }
 }
-
 //display city name as "city, country"
 function addCityTitle (city){
   cityNameContainer.textContent = city.location.name + ", " + city.location.country;
@@ -93,8 +91,6 @@ function startWeather(){
     fetch("http://api.weatherapi.com/v1/forecast.json?key=" + API.key + "&q=" + theNameOfTheCity + "&days=7&aqi=no&alerts=no")
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-    
       if(data.error) {
         // stop the event from continuing the code if there is an error
         return alert("Hey are you sure you are not holding your map upside down?")
