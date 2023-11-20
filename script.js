@@ -2,18 +2,15 @@ import API from "./config.js";
 
 const button = document.querySelector('#submit-search');
 const inputField = document.querySelector('#cityName');
-const cityNameContainer = document.querySelector('.city-info')
 const container = document.querySelector(".container");
 
 //create elements function
-function createWeatherCards(data){
+const createWeatherCards = (data)=> {
   for(let i= 0; i < 5; i++) {
-    // d = date
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const d = new Date();
-    // dow = dateOfWeek
-    const dow = weekdays[(d.getDay() + i) % 7]
-    // Create the elements with Data
+    const date = new Date();
+    const dayOfWeek = weekdays[(date.getDay() + i) % 7]
+
     const card = document.createElement('div');
     card.classList.add("card");
     // if it's the first element (index === 0), add a second class: "main-card" for unique styling
@@ -34,7 +31,7 @@ function createWeatherCards(data){
     card.appendChild(contentBox);
 
     const dowContentBeforeSliderAnimation = document.createElement("h2");
-    dowContentBeforeSliderAnimation.innerHTML = dow;
+    dowContentBeforeSliderAnimation.innerHTML = dayOfWeek;
     contentBox.appendChild(dowContentBeforeSliderAnimation);
 
     const tempDescription = document.createElement("h4");
@@ -75,17 +72,18 @@ function createWeatherCards(data){
   }
 }
 //display city name as "city, country"
-function addCityTitle (city){
+const addCityTitle = (city)=> {
+  const cityNameContainer = document.querySelector('.city-info')
   cityNameContainer.textContent = city.location.name + ", " + city.location.country;
 }
 //function to clear html on new city
-function removeContent(){
+const removeContent = ()=> {
   while (container.lastChild) {
   container.removeChild(container.lastChild);
   }
 }
 //function to start weather app, get API data
-function startWeather(){
+const startWeather = ()=> {
   if (document.getElementById('cityName').value.trim()) {
     const theNameOfTheCity = document.querySelector("#cityName").value;
     fetch("http://api.weatherapi.com/v1/forecast.json?key=" + API.key + "&q=" + theNameOfTheCity + "&days=7&aqi=no&alerts=no")
