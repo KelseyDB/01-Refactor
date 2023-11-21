@@ -190,11 +190,11 @@ main .city-info {
 }
 
 .container .card:after{
-  content: 'Code';
+  content: 'Weather';
   position: absolute;
   top: 40%;
-  left: -20%;
-  font-size: 8em;
+  left: -10%;
+  font-size: 6em;
   transform: rotate(-20deg);
   font-weight: 800; 
   font-style: italic;

@@ -72,9 +72,9 @@ const createWeatherCards = (data)=> {
   }
 }
 //display city name as "city, country"
-const addCityTitle = (city)=> {
+const addCityTitle = (data)=> {
   const cityNameContainer = document.querySelector('.city-info')
-  cityNameContainer.textContent = city.location.name + ", " + city.location.country;
+  cityNameContainer.textContent = data.location.name + ", " + data.location.country;
 }
 //function to clear html on new city
 const removeContent = ()=> {
